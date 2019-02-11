@@ -1,8 +1,17 @@
 # Agile Toolkit - React Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
+From the home directory of the app, run:
 
-## Available Scripts
+`docker-compose build`
+
+followed by: 
+
+`docker-compose up`
+
+The app should be available at [http://localhost:3000](http://localhost:3000) in the browser. 
+
+## Available NPM Scripts
 
 In the project directory, you can run:
 
