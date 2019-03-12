@@ -19,6 +19,10 @@ const styled = withStyles(theme => ({
 }))
 
 class Cards extends React.Component<IProps> {
+  constructor(props) {
+    super(props)
+  }
+
   public render() {
     return this.props.session.votes.map(v => (
       <VoteCard

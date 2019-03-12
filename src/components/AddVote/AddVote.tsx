@@ -22,11 +22,7 @@ class AddVote extends React.Component<Props> {
   public render() {
     return (
       <div>
-        <input
-          type="text"
-          value={this.voteValue}
-          onChange={event => this.updateVoteValue(event)}
-        />
+        <input type="text" onChange={event => this.updateVoteValue(event)} />
         {/* <button onClick={() => this.addVote()} disabled={this.state.hasVoted}>Add Vote</button> */}
         <button onClick={() => this.addVote()}>Add Vote</button>
       </div>

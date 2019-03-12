@@ -2,29 +2,50 @@ import * as React from 'react'
 import Cards from '../../components/Cards'
 import AddVote from '../../components/AddVote'
 import FlexView from 'react-flexview'
-import { func } from 'prop-types'
-
+import { Session } from '../../models/session'
+import CardFlipper from '../../components/CardFlipper'
 const session = {
-  flipped: true,
+  flipped: false,
   votes: [{ value: '1', voter: 'Test' }, { value: '2', voter: 'Test2' }]
 }
 
-const addVote = function(value) {
-  session.votes.push({ value: value, voter: 'Test3' })
-}
+class Home extends React.Component<{}, Session> {
+  constructor(props) {
+    super(props)
+    this.state = session
+  }
 
-const Home = () => (
-  <div>
-    <div>
-      <h1>Agile Toolkit</h1>
-      <FlexView wrap={true} hAlignContent="center">
-        <Cards session={session} />
-      </FlexView>
-      <FlexView wrap={true} hAlignContent="center">
-        <AddVote addVote={addVote} />
-      </FlexView>
-    </div>
-  </div>
-)
+  addVote(value) {
+    this.setState({
+      votes: [
+        ...this.state.votes,
+        { value: value, voter: 'Test' + (this.state.votes.length + 1) }
+      ]
+    })
+  }
+
+  flipCards() {
+    this.setState({ flipped: true })
+  }
+
+  public render() {
+    return (
+      <div>
+        <div>
+          <h1>Agile Toolkit</h1>
+          <FlexView wrap={true} hAlignContent="center">
+            <Cards session={this.state} />
+          </FlexView>
+          <FlexView wrap={true} hAlignContent="center">
+            <AddVote addVote={this.addVote.bind(this)} />
+          </FlexView>
+          <FlexView wrap={true} hAlignContent="center">
+            <CardFlipper flipCards={this.flipCards.bind(this)} />
+          </FlexView>
+        </div>
+      </div>
+    )
+  }
+}
 
 export { Home }
