@@ -1,0 +1,24 @@
+.cardValue {
+  color: black;
+  font-size: 150px;
+  padding-top: 50px;
+  padding-left: 0;
+}
+
+.card {
+  width: 200px;
+  height: 280px;
+  border: 8px solid #e23e47;
+  margin: 30px;
+}
+
+.cardHeaderStyle {
+  float: left;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.logoImg {
+  height: auto;
+  width: 100px;
+}
