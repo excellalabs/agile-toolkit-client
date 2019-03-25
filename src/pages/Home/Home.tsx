@@ -1,30 +1,17 @@
 import * as React from 'react'
 import Cards from '../../components/Cards'
-import AddVote from '../../components/AddVote'
 import FlexView from 'react-flexview'
 import { Session } from '../../models/session'
 import CardFlipper from '../../components/CardFlipper'
-const session = {
-  flipped: false,
-  votes: [{ value: '1', voter: 'Test' }, { value: '2', voter: 'Test2' }]
-}
+import AddVote from '../../components/AddVote'
 
 class Home extends React.Component<{}, Session> {
   constructor(props) {
     super(props)
-    this.state = session
-  }
-
-  addVote(value) {
-    this.setState({
-      votes: [
-        ...this.state.votes,
-        { value: value, voter: 'Test' + (this.state.votes.length + 1) }
-      ]
-    })
   }
 
   flipCards() {
+    // This doesn't do anything now
     this.setState({ flipped: true })
   }
 
@@ -34,10 +21,10 @@ class Home extends React.Component<{}, Session> {
         <div>
           <h1>Agile Toolkit</h1>
           <FlexView wrap={true} hAlignContent="center">
-            <Cards session={this.state} />
+            <Cards />
           </FlexView>
           <FlexView wrap={true} hAlignContent="center">
-            <AddVote addVote={this.addVote.bind(this)} />
+            <AddVote />
           </FlexView>
           <FlexView wrap={true} hAlignContent="center">
             <CardFlipper flipCards={this.flipCards.bind(this)} />
