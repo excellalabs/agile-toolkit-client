@@ -6,7 +6,8 @@ import { Session } from '../../models/session'
 import CardFlipper from '../../components/CardFlipper'
 const session = {
   flipped: false,
-  votes: [{ value: '1', voter: 'Test' }, { value: '2', voter: 'Test2' }]
+  votes: [{ value: '1', voter: 'Test' }, { value: '2', voter: 'Test2' }],
+  name: 'Session 123'
 }
 
 class Home extends React.Component<{}, Session> {
@@ -32,7 +33,7 @@ class Home extends React.Component<{}, Session> {
     return (
       <div>
         <div>
-          <h1>Agile Toolkit</h1>
+          <h1>{this.state.name}</h1>
           <FlexView wrap={true} hAlignContent="center">
             <Cards session={this.state} />
           </FlexView>
