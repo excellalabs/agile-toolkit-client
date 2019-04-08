@@ -4,7 +4,6 @@ import AddVote from '../../components/AddVote'
 import FlexView from 'react-flexview'
 import { Session } from '../../models/session'
 import CardFlipper from '../../components/CardFlipper'
-import ClearVotes from '../../components/ClearVotes'
 const session = {
   flipped: false,
   votes: [{ value: '1', voter: 'Test' }, { value: '2', voter: 'Test2' }]
@@ -29,10 +28,6 @@ class Home extends React.Component<{}, Session> {
     this.setState({ flipped: true })
   }
 
-  clearVotes() {
-    this.setState({ flipped: false, votes: [] })
-  }
-
   public render() {
     return (
       <div>
@@ -46,9 +41,6 @@ class Home extends React.Component<{}, Session> {
           </FlexView>
           <FlexView wrap={true} hAlignContent="center">
             <CardFlipper flipCards={this.flipCards.bind(this)} />
-          </FlexView>
-          <FlexView wrap={true} hAlignContent="center">
-            <ClearVotes clearVotes={this.clearVotes.bind(this)} />
           </FlexView>
         </div>
       </div>
