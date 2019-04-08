@@ -1,33 +1,48 @@
 import * as React from 'react'
+import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo'
 
-interface Props {
-  //classes: Classes
-  addVote: Function
-}
-
-interface Classes {
-  fab: string
-}
-
-class AddVote extends React.Component<Props> {
-  updateVoteValue(event) {
-    this.voteValue = event.target.value
+const ADD_VOTE = gql`
+  mutation AddVote($sessionId: String, $value: String) {
+    createVote(sessionId: $sessionId, value: $value) {
+      _id
+      votes {
+        value
+      }
+    }
   }
+`
 
-  addVote() {
-    this.props.addVote(this.voteValue)
-  }
-  voteValue
+const AddVote = () => {
+  let input
 
-  public render() {
-    return (
-      <div>
-        <input type="text" onChange={event => this.updateVoteValue(event)} />
-        {/* <button onClick={() => this.addVote()} disabled={this.state.hasVoted}>Add Vote</button> */}
-        <button onClick={() => this.addVote()}>Add Vote</button>
-      </div>
-    )
-  }
+  return (
+    <Mutation mutation={ADD_VOTE}>
+      {(addVote, { data }) => (
+        <div>
+          <form
+            onSubmit={e => {
+              e.preventDefault()
+              addVote({
+                variables: {
+                  sessionId: '5c9957d359f5d60069c7b80c',
+                  value: input.value
+                }
+              })
+              input.value = ''
+            }}
+          >
+            <input
+              ref={node => {
+                input = node
+              }}
+            />
+            <button type="submit">Add Vote</button>
+          </form>
+        </div>
+      )}
+    </Mutation>
+  )
 }
 
 export default AddVote
