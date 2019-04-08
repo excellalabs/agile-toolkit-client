@@ -4,6 +4,7 @@ import FlexView from 'react-flexview'
 import { Session } from '../../models/session'
 import CardFlipper from '../../components/CardFlipper'
 import AddVote from '../../components/AddVote'
+import ClearVotes from '../../components/ClearVotes'
 
 class Home extends React.Component<{}, Session> {
   constructor(props) {
@@ -13,6 +14,10 @@ class Home extends React.Component<{}, Session> {
   flipCards() {
     // This doesn't do anything now
     this.setState({ flipped: true })
+  }
+
+  clearVotes() {
+    this.setState({ flipped: false, votes: [] })
   }
 
   public render() {
@@ -28,6 +33,9 @@ class Home extends React.Component<{}, Session> {
           </FlexView>
           <FlexView wrap={true} hAlignContent="center">
             <CardFlipper flipCards={this.flipCards.bind(this)} />
+          </FlexView>
+          <FlexView wrap={true} hAlignContent="center">
+            <ClearVotes clearVotes={this.clearVotes.bind(this)} />
           </FlexView>
         </div>
       </div>

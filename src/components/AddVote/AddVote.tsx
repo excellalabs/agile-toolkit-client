@@ -1,6 +1,6 @@
 import * as React from 'react'
-import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
+import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo'
 
 const ADD_VOTE = gql`
   mutation AddVote($sessionId: String, $value: String) {
@@ -11,10 +11,10 @@ const ADD_VOTE = gql`
       }
     }
   }
-`;
+`
 
 const AddVote = () => {
-  let input;
+  let input
 
   return (
     <Mutation mutation={ADD_VOTE}>
@@ -22,14 +22,19 @@ const AddVote = () => {
         <div>
           <form
             onSubmit={e => {
-              e.preventDefault();
-              addVote({ variables: { sessionId: "5c9957d359f5d60069c7b80c",  value: input.value } });
-              input.value = "";
+              e.preventDefault()
+              addVote({
+                variables: {
+                  sessionId: '5c9957d359f5d60069c7b80c',
+                  value: input.value
+                }
+              })
+              input.value = ''
             }}
           >
             <input
               ref={node => {
-                input = node;
+                input = node
               }}
             />
             <button type="submit">Add Vote</button>
@@ -37,7 +42,7 @@ const AddVote = () => {
         </div>
       )}
     </Mutation>
-  );
-};
+  )
+}
 
-export default AddVote;
+export default AddVote
