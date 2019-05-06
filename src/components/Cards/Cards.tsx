@@ -7,8 +7,7 @@ import gql from "graphql-tag";
 import { constants } from "../../constants"
 
 interface IProps {
-  classes: IClasses
-  session: Session
+  sessionId: String
 }
 
 const GET_SESSION_QUERY = gql`
@@ -26,6 +25,18 @@ const GET_SESSION_QUERY = gql`
 
 interface IClasses {}
 
+const GET_SESSION = gql`
+  query session($id: String) {
+    session(id: $id) {
+      _id
+      data
+      votes {
+        value
+      }
+    }
+  }
+`
+
 class Cards extends React.Component<IProps> {
   constructor(props) {
     super(props)
@@ -33,14 +44,13 @@ class Cards extends React.Component<IProps> {
 
   public render() {
     return (
-      <Query 
-        query={GET_SESSION_QUERY}
-        variables= {{ id: constants.local_session_id }}
+      <Query
+        query={GET_SESSION}
+        variables={{ id: this.props.sessionId }}
       >
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error :(</p>;
-
           return data.session.votes.map(({ value }, index) => (
             <VoteCard
               key={index}
