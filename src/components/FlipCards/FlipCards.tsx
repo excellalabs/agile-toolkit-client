@@ -2,6 +2,8 @@ import * as React from 'react'
 import gql from 'graphql-tag'
 import { withStyles } from '@material-ui/core'
 import { Mutation } from 'react-apollo'
+import { constants } from 'http2';
+import { constants as appConstants } from '../../constants'
 
 interface Props {
   flipCards: Function
@@ -20,8 +22,8 @@ const styled = withStyles(theme => ({
 }))
 
 const FLIP_CARDS_MUTATION = gql`
-mutation {
-  flip(id: "5d129f7829310c00b55a0dfe") {
+mutation flipCards($id: String) {
+  flip(id: $id) {
     _id
     name
     votes {
@@ -36,7 +38,9 @@ const FlipCards = () => {
   let input
 
   return (
-    <Mutation mutation={FLIP_CARDS_MUTATION}>
+    <Mutation 
+      mutation={FLIP_CARDS_MUTATION}
+    >
       {(flipCards, { data }) => (
         <div>
           <form
@@ -44,7 +48,7 @@ const FlipCards = () => {
               e.preventDefault()
               flipCards({
                 variables: {
-                  sessionId: '5d129f7829310c00b55a0dfe'
+                  id: appConstants.local_session_id
                 }
               })
             }}
