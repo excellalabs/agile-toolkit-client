@@ -10,6 +10,19 @@ interface IProps {
   session: Session
 }
 
+const GET_SESSION_QUERY = gql`
+{
+  session(id: "5d129f7829310c00b55a0dfe") {
+    _id
+    name
+    votes {
+      value
+    }
+    flipped
+  }
+}
+`
+
 interface IClasses {}
 
 class Cards extends React.Component<IProps> {
@@ -19,28 +32,17 @@ class Cards extends React.Component<IProps> {
 
   public render() {
     return (
-      <Query
-        query={gql`
-          {
-            sessions {
-              _id
-              data
-              votes {
-                value
-              }
-            }
-          }
-        `}
-      >
+      <Query query={GET_SESSION_QUERY}>
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error :(</p>;
 
-          return data.sessions[0].votes.map(({ value }, index) => (
+            console.log("Flipped? " + data.session.flipped);
+          return data.session.votes.map(({ value }, index) => (
             <VoteCard
               key={index}
               value={value}
-              showValue={true}
+              showValue={data.session.flipped}
             />
           ));
         }}

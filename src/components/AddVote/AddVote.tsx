@@ -25,7 +25,7 @@ const AddVote = () => {
               e.preventDefault()
               addVote({
                 variables: {
-                  sessionId: '5c9957d359f5d60069c7b80c',
+                  sessionId: '5d129f7829310c00b55a0dfe',
                   value: input.value
                 }
               })
