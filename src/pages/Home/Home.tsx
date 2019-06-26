@@ -2,7 +2,7 @@ import * as React from 'react'
 import Cards from '../../components/Cards'
 import FlexView from 'react-flexview'
 import { Session } from '../../models/session'
-import CardFlipper from '../../components/CardFlipper'
+import FlipCards from '../../components/FlipCards'
 import AddVote from '../../components/AddVote'
 import ClearVotes from '../../components/ClearVotes'
 
@@ -32,7 +32,7 @@ class Home extends React.Component<{}, Session> {
             <AddVote />
           </FlexView>
           <FlexView wrap={true} hAlignContent="center">
-            <CardFlipper flipCards={this.flipCards.bind(this)} />
+            <FlipCards />
           </FlexView>
           <FlexView wrap={true} hAlignContent="center">
             <ClearVotes clearVotes={this.clearVotes.bind(this)} />

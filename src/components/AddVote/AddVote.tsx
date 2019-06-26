@@ -1,6 +1,7 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
+import { constants } from '../../constants'
 
 const ADD_VOTE = gql`
   mutation AddVote($sessionId: String, $value: String) {
@@ -25,7 +26,7 @@ const AddVote = () => {
               e.preventDefault()
               addVote({
                 variables: {
-                  sessionId: '5c9957d359f5d60069c7b80c',
+                  sessionId: constants.local_session_id,
                   value: input.value
                 }
               })

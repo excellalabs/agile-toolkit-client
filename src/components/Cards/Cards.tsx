@@ -4,11 +4,25 @@ import VoteCard from '../VoteCard/VoteCard'
 import { Session } from '../../models/session'
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import { constants } from "../../constants"
 
 interface IProps {
   classes: IClasses
   session: Session
 }
+
+const GET_SESSION_QUERY = gql`
+  query session($id: String) {
+    session(id: $id) {
+      _id
+      name
+      votes {
+        value
+      }
+      flipped
+    }
+  }
+`
 
 interface IClasses {}
 
@@ -19,28 +33,19 @@ class Cards extends React.Component<IProps> {
 
   public render() {
     return (
-      <Query
-        query={gql`
-          {
-            sessions {
-              _id
-              data
-              votes {
-                value
-              }
-            }
-          }
-        `}
+      <Query 
+        query={GET_SESSION_QUERY}
+        variables= {{ id: constants.local_session_id }}
       >
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error :(</p>;
 
-          return data.sessions[0].votes.map(({ value }, index) => (
+          return data.session.votes.map(({ value }, index) => (
             <VoteCard
               key={index}
               value={value}
-              showValue={true}
+              showValue={data.session.flipped}
             />
           ));
         }}

@@ -23,7 +23,7 @@ const VoteCard = ({ value, showValue }: IProps) => {
     // TODO: Need to add styling to make large Excella logo responsive
     cardContent = (
       <CardContent>
-        <img className={logoImg} src={ExcellaLogoLarge} />
+        <img className={logoImg} src={ExcellaLogoSmall} />
       </CardContent>
     )
   }
