@@ -1,4 +1,5 @@
 export const routes = {
   home: '/',
-  planningPoker: '/planning-poker'
+  planningPoker: '/planning-poker',
+  createSession: '/create-session'
 }
