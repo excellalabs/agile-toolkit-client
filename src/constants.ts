@@ -1,3 +1,3 @@
 export const constants = {
-    local_session_id: "5d129f7829310c00b55a0dfe"
+    local_session_id: "5d12a6237d5e93006e6af520"
 };
